@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	database.InitDB()
+	database.ConnectDB()
 	database.CreateTables()
 
 	r := mux.NewRouter()

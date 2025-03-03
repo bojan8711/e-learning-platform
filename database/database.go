@@ -1,26 +1,25 @@
 package database
 
 import (
+	"database/sql"
 	"fmt"
-	"log"
-	"os"
 
-	"github.com/jmoiron/sqlx"
+	_ "github.com/lib/pq" // PostgreSQL drajver
 )
 
-var DB *sqlx.DB
-
-func InitDB() {
-	var err error
-	connStr := fmt.Sprintf("user=%s password=%s dbname=%s sslmode=disable",
-		os.Getenv("DB_USER"),
-		os.Getenv("DB_PASSWORD"),
-		os.Getenv("DB_NAME"),
-	)
-
-	DB, err = sqlx.Connect("postgress", connStr)
+func ConnectDB() (*sql.DB, error) {
+	// Definiši string za konekciju prema bazi
+	connStr := "user=postgres password=yourpassword dbname=yourdbname sslmode=disable"
+	db, err := sql.Open("postgres", connStr)
 	if err != nil {
-		log.Fatal("Neuspešno povezivanje sa bazom:", err)
+		return nil, fmt.Errorf("Neuspešno povezivanje sa bazom: %v", err)
 	}
-	fmt.Printf("✅ Uspostavljena konekcija sa bazom!")
+
+	// Testiraj konekciju sa bazom
+	err = db.Ping()
+	if err != nil {
+		return nil, fmt.Errorf("Neuspešno povezivanje sa bazom: %v", err)
+	}
+
+	return db, nil
 }

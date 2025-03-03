@@ -1,12 +1,11 @@
 package handlers
 
 import (
-	"e-learning-platform/database"
-	"e-learning-platform/models"
 	"encoding/json"
 	"net/http"
 
 	"github.com/bojan8711/e-learning-platform/database"
+	"github.com/bojan8711/e-learning-platform/models"
 )
 
 func RegisterHandler(w http.ResponseWriter, r *http.Request) {
