@@ -7,19 +7,25 @@ import (
 	_ "github.com/lib/pq" // PostgreSQL drajver
 )
 
-func ConnectDB() (*sql.DB, error) {
+var DB *sql.DB // Globalna varijabla za bazu
+
+// Funkcija za povezivanje sa bazom
+func ConnectDB() error {
 	// Definiši string za konekciju prema bazi
-	connStr := "user=postgres password=yourpassword dbname=yourdbname sslmode=disable"
-	db, err := sql.Open("postgres", connStr)
+	connStr := "user=admin password=Ste11@2016 dbname=elearning sslmode=disable"
+	var err error
+	DB, err = sql.Open("postgres", connStr)
 	if err != nil {
-		return nil, fmt.Errorf("Neuspešno povezivanje sa bazom: %v", err)
+		return fmt.Errorf("Neuspešno povezivanje sa bazom: %v", err)
 	}
 
 	// Testiraj konekciju sa bazom
-	err = db.Ping()
+	err = DB.Ping()
 	if err != nil {
-		return nil, fmt.Errorf("Neuspešno povezivanje sa bazom: %v", err)
+		return fmt.Errorf("Neuspešno povezivanje sa bazom: %v", err)
 	}
 
-	return db, nil
+	fmt.Println("Povezan sa bazom!")
+	return nil
+
 }

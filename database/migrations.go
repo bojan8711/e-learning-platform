@@ -2,7 +2,7 @@ package database
 
 import "fmt"
 
-func CreateTables() {
+func RunMigrations() {
 	query := `
     CREATE TABLE IF NOT EXISTS users (
         id SERIAL PRIMARY KEY,

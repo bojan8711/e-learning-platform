@@ -12,7 +12,7 @@ import (
 
 func main() {
 	database.ConnectDB()
-	database.CreateTables()
+	database.RunMigrations()
 
 	r := mux.NewRouter()
 	r.HandleFunc("/register", handlers.RegisterHandler).Methods("POST")
