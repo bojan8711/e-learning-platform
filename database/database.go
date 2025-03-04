@@ -27,7 +27,7 @@ func ConnectDB() error {
 
 	// Definiši string za konekciju prema bazi
 	connStr := fmt.Sprintf("user=%s password=%s dbname=%s sslmode=%s", dbUser, dbPassword, dbName, dbSSLMode)
-	var err error
+
 	DB, err = sql.Open("postgres", connStr)
 	if err != nil {
 		return fmt.Errorf("Neuspešno povezivanje sa bazom: %v", err)
